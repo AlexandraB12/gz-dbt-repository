@@ -19,7 +19,6 @@ filtered AS (
     logCost,
     CAST(ship_cost AS FLOAT64) AS ship_cost
   FROM renamed
-  WHERE shipping_fee <> shipping_fee_1
 )
 
 SELECT * FROM filtered
