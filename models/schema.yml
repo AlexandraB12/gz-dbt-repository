@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: gz_raw_data  # où se situe la table dans BQ
+    description: greenwez raw data source
+    tables:
+      - name: sales
+        identifier: raw_gz_sales  # nom exact de la table dans BQ
+        description: sales of greenweez / we have one row per product_id found in each order_id
+        freshness:
+          warn_after:
+            count: 90
+            period: day
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+        columns:
+          - name: "(orders_id || '-' || pdt_id)"
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+        
+
+      - name: product
+        identifier: raw_gz_product
+        description: purchase_price by products_id
+        columns:
+          - name: products_id
+            description: primary key of the table
+            tests:
+              - unique
+
+      - name: ship
+        identifier: raw_gz_ship
+        description: Unique identifier for each shipping record / ship_cost by orders_id
+        columns:
+          - name: "(orders_id || '-' || orders_id)"
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
