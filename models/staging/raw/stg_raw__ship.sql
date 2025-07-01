@@ -22,5 +22,5 @@ filtered AS (
   WHERE shipping_fee <> shipping_fee_1
 )
 
-SELECT * FROM filtered;
+SELECT * FROM filtered
 
