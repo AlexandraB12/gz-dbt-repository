@@ -1,3 +1,5 @@
+
+
 SELECT
         operational.date_date,
         COUNT(operational.orders_id) AS total_transactions,
