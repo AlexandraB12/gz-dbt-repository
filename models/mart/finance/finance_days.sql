@@ -10,6 +10,7 @@ SELECT
         SUM(orders.total_purchase_cost) AS total_purchase_cost,
         ROUND(SUM(operational.shipping_fee),2) AS total_shipping_fees,
         ROUND(SUM(operational.logcost),2) AS total_log_costs,
+        ROUND(SUM(operational.ship_cost),2) AS total_ship_costs,
         SUM(orders.total_quantity) AS total_quantity_sold
     FROM {{ ref('int_orders_operational') }} as operational
     LEFT JOIN {{ ref('int_orders_margin') }} AS orders
